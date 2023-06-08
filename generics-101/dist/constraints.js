@@ -22,3 +22,8 @@ function printDoubleLength(thing) {
 // ! in examples above argument passed to function should have length property, otherwise ts will complain
 // ==================================================================================================
 // ==================================================================================================
+function makeEmptyArray() {
+    return [];
+}
+const strings = makeEmptyArray();
+const unknown = makeEmptyArray();

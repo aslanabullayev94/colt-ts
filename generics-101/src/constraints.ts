@@ -40,3 +40,9 @@ function printDoubleLength<T extends Lengthy>(thing: T): number {
 // ==================================================================================================
 // ==================================================================================================
 
+function makeEmptyArray<T>(): T[] {
+  return [];
+}
+
+const strings = makeEmptyArray<string>();
+const unknown = makeEmptyArray();
