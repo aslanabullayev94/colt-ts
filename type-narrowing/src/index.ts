@@ -74,3 +74,53 @@ function makeNoise(animal: Cat | Dog): string {
   }
   return "woof";
 }
+
+//  ! ======================================================================================================================
+//  ! ======================================== NARROWING WITH DISCRIMINATED UNIONS =========================================
+//  ! ======================================================================================================================
+
+interface Rooster {
+  name: string;
+  weight: number;
+  age: number;
+  kind: "Rooster";
+}
+
+interface Cow {
+  name: string;
+  weight: number;
+  age: number;
+  kind: "Cow";
+}
+
+interface Pig {
+  name: string;
+  weight: number;
+  age: number;
+  kind: "Pig";
+}
+
+type FarmAnimal = Rooster | Cow | Pig;
+
+function getFarmAnimalSound(animal: FarmAnimal) {
+  if (animal.kind === "Pig") {
+    // * ts will know here that animal object is Rooster interface
+    return "Oink";
+  }
+  if (animal.kind === "Cow") {
+    return "Moo";
+  }
+  if (animal.kind === "Rooster") {
+    return "Doodldoo";
+  }
+  const shouldNeverGetHere: never = animal;
+  return shouldNeverGetHere;
+  // * we should never make it here if all cases handled correctly
+  // * comment out last if option to see how ts will warn you
+  // * it is because not all cases going to be handled and animal can not be assigned to type never
+  // * so, assigning to type never as default makes sure that all cases are handled above
+}
+console.log(
+  "getFarmAnimalSound ===>",
+  getFarmAnimalSound({ name: "steevie", weight: 2, age: 1.2, kind: "Rooster" })
+);

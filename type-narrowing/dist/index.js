@@ -45,3 +45,22 @@ function makeNoise(animal) {
     }
     return "woof";
 }
+function getFarmAnimalSound(animal) {
+    if (animal.kind === "Pig") {
+        // * ts will know here that animal object is Rooster interface
+        return "Oink";
+    }
+    if (animal.kind === "Cow") {
+        return "Moo";
+    }
+    if (animal.kind === "Rooster") {
+        return "Doodldoo";
+    }
+    const shouldNeverGetHere = animal;
+    return shouldNeverGetHere;
+    // * we should never make it here if all cases handled correctly
+    // * comment out last if option to see how ts will warn you
+    // * it is because not all cases going to be handled and animal can not be assigned to type never
+    // * so, assigning to type never as default makes sure that all cases are handled above
+}
+console.log("getFarmAnimalSound ===>", getFarmAnimalSound({ name: "steevie", weight: 2, age: 1.2, kind: "Rooster" }));
